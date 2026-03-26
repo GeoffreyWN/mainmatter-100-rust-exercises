@@ -74,13 +74,13 @@ fn validate_product_name(product_name: &String) {
 }
 
 fn validate_quantity(quantity: &u32) {
-    if quantity < &0 {
+    if quantity <= &0 {
         panic!("invalid quantity");
     }
 }
 
 fn validate_unit_price(unit_price: &u32) {
-    if unit_price < &0 {
+    if unit_price <= &0 {
         panic!("invalid unit_price");
     }
 }
