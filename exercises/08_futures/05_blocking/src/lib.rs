@@ -18,7 +18,6 @@ pub async fn echo(listener: TcpListener) -> Result<(), anyhow::Error> {
             socket.write_all(&buffer)?;
             Ok(())
         });
-
     }
 }
 

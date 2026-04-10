@@ -1,7 +1,7 @@
 use crate::data::{Ticket, TicketDraft};
 use crate::store::{TicketId, TicketStore};
-use std::sync::mpsc::{Receiver, Sender};
 use crate::Command::{Get, Insert};
+use std::sync::mpsc::{Receiver, Sender};
 
 pub mod data;
 pub mod store;
@@ -17,10 +17,12 @@ impl TicketStoreClient {
     pub fn insert(&self, draft: TicketDraft) -> TicketId {
         let (response_sender, response_receiver) = std::sync::mpsc::channel();
 
-        self.sender.send(Insert {
-            draft,
-            response_channel: response_sender,
-        }).unwrap();
+        self.sender
+            .send(Insert {
+                draft,
+                response_channel: response_sender,
+            })
+            .unwrap();
 
         response_receiver.recv().unwrap()
     }
@@ -28,9 +30,12 @@ impl TicketStoreClient {
     pub fn get(&self, id: TicketId) -> Option<Ticket> {
         let (response_sender, response_receiver) = std::sync::mpsc::channel();
 
-        self.sender.send(Get { id,
-            response_channel: response_sender
-        }).unwrap();
+        self.sender
+            .send(Get {
+                id,
+                response_channel: response_sender,
+            })
+            .unwrap();
 
         response_receiver.recv().unwrap()
     }

@@ -1,8 +1,8 @@
 // TODO: Convert the implementation to use bounded channels.
 use crate::data::{Ticket, TicketDraft};
 use crate::store::{TicketId, TicketStore};
-use std::sync::mpsc::{Receiver, SyncSender};
 use crate::Command::{Get, Insert};
+use std::sync::mpsc::{Receiver, SyncSender};
 
 pub mod data;
 pub mod store;
@@ -16,10 +16,12 @@ impl TicketStoreClient {
     pub fn insert(&self, draft: TicketDraft) -> Result<TicketId, OverLoadedError> {
         let (response_sender, response_receiver) = std::sync::mpsc::sync_channel(1);
 
-        self.sender.try_send(Insert {
-            draft,
-            response_channel: response_sender,
-        }).map_err(|_| OverLoadedError)?;
+        self.sender
+            .try_send(Insert {
+                draft,
+                response_channel: response_sender,
+            })
+            .map_err(|_| OverLoadedError)?;
 
         Ok(response_receiver.recv().map_err(|_| OverLoadedError)?)
     }
@@ -27,10 +29,12 @@ impl TicketStoreClient {
     pub fn get(&self, id: TicketId) -> Result<Option<Ticket>, OverLoadedError> {
         let (response_sender, response_receiver) = std::sync::mpsc::sync_channel(1);
 
-        self.sender.try_send(Get {
-            id,
-            response_channel: response_sender,
-        }).map_err(|_| OverLoadedError)?;
+        self.sender
+            .try_send(Get {
+                id,
+                response_channel: response_sender,
+            })
+            .map_err(|_| OverLoadedError)?;
 
         Ok(response_receiver.recv().unwrap())
     }

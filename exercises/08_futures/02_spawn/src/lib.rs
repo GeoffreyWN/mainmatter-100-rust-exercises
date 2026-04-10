@@ -12,7 +12,6 @@ pub async fn echoes(first: TcpListener, second: TcpListener) -> Result<(), anyho
     outcome1??;
     outcome2??;
     Ok(())
-
 }
 
 async fn echo(listener: TcpListener) -> Result<(), anyhow::Error> {
@@ -23,7 +22,6 @@ async fn echo(listener: TcpListener) -> Result<(), anyhow::Error> {
             let (mut reader, mut writer) = socket.split();
             tokio::io::copy(&mut reader, &mut writer).await.unwrap();
         });
-
     }
 }
 

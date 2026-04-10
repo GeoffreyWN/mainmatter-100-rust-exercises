@@ -15,7 +15,6 @@ impl Shape {
             Shape::Triangle => 3,
             Shape::Pentagon => 5,
         }
-
     }
 }
 

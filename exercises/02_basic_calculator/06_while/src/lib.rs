@@ -12,7 +12,6 @@ pub fn factorial(n: u32) -> u32 {
         i += 1;
     }
     result
-
 }
 
 #[cfg(test)]

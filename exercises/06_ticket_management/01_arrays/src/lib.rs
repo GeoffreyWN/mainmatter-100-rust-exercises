@@ -16,18 +16,19 @@ pub enum Weekday {
 
 impl WeekTemperatures {
     pub fn new() -> Self {
-        Self { temperatures: [None; 7] }
+        Self {
+            temperatures: [None; 7],
+        }
     }
 
     pub fn get_temperature(&self, day: Weekday) -> Option<i32> {
-
         let index = weekday2index(&day);
         self.temperatures[index]
     }
 
     pub fn set_temperature(&mut self, day: Weekday, temperature: i32) {
         let index = weekday2index(&day);
-        
+
         self.temperatures[index] = Some(temperature);
     }
 }

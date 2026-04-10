@@ -30,7 +30,9 @@ impl TryFrom<&str> for Status {
             "todo" => Ok(Status::ToDo),
             "inprogress" => Ok(Status::InProgress),
             "done" => Ok(Status::Done),
-            _ => Err(ParseStatusError{ invalid_status: value.to_string() }),
+            _ => Err(ParseStatusError {
+                invalid_status: value.to_string(),
+            }),
         }
     }
 }

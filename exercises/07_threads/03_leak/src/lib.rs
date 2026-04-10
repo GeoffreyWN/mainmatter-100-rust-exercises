@@ -6,7 +6,6 @@
 use std::thread;
 
 pub fn sum(v: Vec<i32>) -> i32 {
-
     let leaked_vec = v.leak();
     let mid = leaked_vec.len() / 2;
 

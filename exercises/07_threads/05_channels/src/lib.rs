@@ -1,6 +1,6 @@
-use std::sync::mpsc::{Receiver, Sender};
 use crate::data::TicketDraft;
 use crate::store::TicketStore;
+use std::sync::mpsc::{Receiver, Sender};
 
 pub mod data;
 pub mod store;

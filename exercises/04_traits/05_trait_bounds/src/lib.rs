@@ -8,7 +8,7 @@
 /// Return the minimum of two values.
 pub fn min<T>(left: T, right: T) -> T
 where
-    T: Ord
+    T: Ord,
 {
     if left <= right {
         left

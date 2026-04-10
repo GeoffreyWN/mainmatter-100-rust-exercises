@@ -1,5 +1,5 @@
-use std::sync::mpsc::{sync_channel, Receiver, SyncSender};
 use crate::Command::Update;
+use std::sync::mpsc::{sync_channel, Receiver, SyncSender};
 // TODO: Implement the patching functionality.
 use crate::data::{Ticket, TicketDraft, TicketPatch};
 use crate::store::{TicketId, TicketStore};
@@ -38,10 +38,12 @@ impl TicketStoreClient {
     pub fn update(&self, ticket_patch: TicketPatch) -> Result<(), OverloadedError> {
         let (response_sender, response_receiver) = sync_channel(1);
 
-        self.sender.try_send( Update {
-            patch: ticket_patch,
-            response_channel: response_sender,
-        }).map_err(|_| OverloadedError)?;
+        self.sender
+            .try_send(Update {
+                patch: ticket_patch,
+                response_channel: response_sender,
+            })
+            .map_err(|_| OverloadedError)?;
 
         Ok(response_receiver.recv().unwrap())
     }

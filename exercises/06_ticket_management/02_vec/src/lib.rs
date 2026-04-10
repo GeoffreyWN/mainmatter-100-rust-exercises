@@ -19,7 +19,6 @@ pub fn fibonacci(n: u32) -> u32 {
     let mut result: Vec<u32> = vec![0, 1];
 
     for i in 2..=n {
-
         result.push(result[i - 1] + result[i - 2]);
     }
 

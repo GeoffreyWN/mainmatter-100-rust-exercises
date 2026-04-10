@@ -3,7 +3,7 @@
 //  You can see the expected API in the tests below.
 
 struct DropBomb {
-    defused: bool
+    defused: bool,
 }
 
 impl DropBomb {
@@ -22,8 +22,6 @@ impl Drop for DropBomb {
             panic!("Boom!")
         }
     }
-
-
 }
 
 #[cfg(test)]

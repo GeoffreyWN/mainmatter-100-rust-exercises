@@ -40,7 +40,6 @@ impl Ticket {
             Status::InProgress { assigned_to } => Some(assigned_to),
             _ => None,
         }
-
     }
 }
 
